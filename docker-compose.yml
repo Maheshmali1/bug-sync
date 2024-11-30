@@ -3,11 +3,13 @@ services:
   mongodb:
     image: mongo:latest
     container_name: mongodb
+    profiles:
+      - prod
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: bug-sync
-      MONGO_INITDB_ROOT_PASSWORD: bug-sync-password
+      MONGO_INITDB_ROOT_USERNAME: bug_sync
+      MONGO_INITDB_ROOT_PASSWORD: bug_sync_password
     volumes:
       - mongodb_data:/data/db
 
@@ -16,6 +18,9 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: api-bug-sync
+    profiles:
+      - dev
+      - prod
     ports:
       - "3000:3000"
     volumes:
@@ -24,6 +29,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      DATABASE_URL: mongodb://admin:password@mongodb:27017
+      DATABASE_URL: mongodb://bug_sync:bug_sync_password@mongodb:27017
+      PORT: 3000
 volumes:
   mongodb_data:

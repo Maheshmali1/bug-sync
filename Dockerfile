@@ -1,6 +1,12 @@
 # Use Node.js LTS version
 FROM node:18
 
+RUN apt-get update && apt-get install -y \
+  build-essential \
+  python3 \
+  python3-pip \
+  && rm -rf /var/lib/apt/lists/*
+
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
