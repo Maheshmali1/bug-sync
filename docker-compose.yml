@@ -26,8 +26,8 @@ services:
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
-    depends_on:
-      - mongodb
+#    depends_on:
+#      - mongodb
     environment:
       DATABASE_URL: mongodb://bug_sync:bug_sync_password@mongodb:27017
       PORT: 3000

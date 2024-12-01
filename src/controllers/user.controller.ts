@@ -6,15 +6,16 @@ import {
   HttpException,
   HttpStatus,
   Logger, Param, Patch,
-  Post, UseInterceptors,
+  Post, UseGuards, UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from '../services';
 import { updateUserDTO, UserDTO, UserListResponseDTO, UserResponseDTO } from '../dtos';
 import { safeJSONStringify } from '../utils';
-import { IsMongoId } from 'class-validator';
+import { AuthGuard } from '../guards';
 
 @Controller('users')
 @UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(AuthGuard)
 export class  UserController {
   constructor(private readonly _userService: UserService) {
   }

@@ -1,0 +1,6 @@
+export enum BUG_STATUS {
+  OPEN,
+  IN_PROGRESS,
+  CLOSED,
+  BLOCKED,
+}
