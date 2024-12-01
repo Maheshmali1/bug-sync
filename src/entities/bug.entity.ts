@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
-import { APP_DOMAINS, BUG_STATUS } from '../constants';
+import { APP_DOMAINS, BUG_PRIORITY, BUG_STATUS } from '../constants';
 
 @Schema({
   versionKey: false,
@@ -34,6 +34,9 @@ export class Bug {
 
   @Prop({type: Date, required: true})
   due_date: Date;
+
+  @Prop({type:String, enum: BUG_PRIORITY, required: true})
+  priority: BUG_PRIORITY;
 
   @Prop({type: Types.ObjectId, ref: 'User'})
   reporter_id: Types.ObjectId;

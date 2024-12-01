@@ -11,3 +11,9 @@ export enum APP_DOMAINS {
   FOOD_DELIVERY = "food delivery",
   CAB_BOOKING = "cab booking"
 }
+
+export enum USER_AVAILABILITY {
+  AVAILABLE = 'available',
+  BUSY = 'busy',
+  UNAVAILABLE = 'unavailable',
+}

@@ -1,5 +1,5 @@
 import { IsDate, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { APP_DOMAINS, BUG_STATUS } from '../constants';
+import { APP_DOMAINS, BUG_PRIORITY, BUG_STATUS } from '../constants';
 import { Exclude, Expose, Transform } from 'class-transformer';
 import { Types } from 'mongoose';
 import { Comment } from '../entities';
@@ -22,6 +22,10 @@ export class BugDTO {
     toClassOnly: true
   })
   due_date: String;
+
+  @IsNotEmpty()
+  @IsEnum(BUG_PRIORITY)
+  priority: BUG_PRIORITY;
 
   constructor(bug: Partial<BugDTO>) {
     Object.assign(this, bug);

@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { APP_DOMAINS, USER_ROLES } from '../constants';
+import { APP_DOMAINS, USER_AVAILABILITY, USER_ROLES } from '../constants';
 import { Document } from 'mongoose';
 
 @Schema(
@@ -27,6 +27,9 @@ export class User {
 
   @Prop({ type: Boolean, default: false })
   is_delete: boolean
+
+  @Prop({type: String, enum: USER_AVAILABILITY, default: USER_AVAILABILITY.AVAILABLE})
+  availability: USER_AVAILABILITY;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);

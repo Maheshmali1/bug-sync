@@ -1,6 +1,12 @@
 export enum BUG_STATUS {
-  OPEN,
-  IN_PROGRESS,
-  CLOSED,
-  BLOCKED,
+  OPEN = 'open',
+  IN_PROGRESS = 'in-progress',
+  CLOSED = 'closed',
+  BLOCKED = 'blocked',
+}
+
+export enum BUG_PRIORITY {
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
 }

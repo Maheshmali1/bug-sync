@@ -125,6 +125,7 @@ The **Bug-Sync Platform** follows a **modular architecture** to ensure maintaina
 |   │   ├── utils/
 |   │   ├── api-bug-sync.module/
 |   │   └── main.ts
+|   ├── kestra/
 |   ├── test/
 |   ├── .eslintrc.js
 |   ├── .gitignore

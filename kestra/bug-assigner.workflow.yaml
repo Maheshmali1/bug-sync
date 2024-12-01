@@ -1,0 +1,18 @@
+id: bugscheduler
+namespace: bugsync
+tasks:
+  - id: node-script
+    type: io.kestra.plugin.scripts.node.Commands
+    beforeCommands:
+      - npm install mongodb
+    commands:
+      - node main.js
+    namespaceFiles:
+      enabled: true
+    taskRunner:
+      type: io.kestra.plugin.scripts.runner.docker.Docker
+
+triggers:
+  - id: schedule_trigger
+    type: io.kestra.plugin.core.trigger.Schedule
+    cron: "*/1 * * * *"
