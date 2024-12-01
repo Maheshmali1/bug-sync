@@ -31,5 +31,6 @@ services:
     environment:
       DATABASE_URL: mongodb://bug_sync:bug_sync_password@mongodb:27017
       PORT: 3000
+      AUTH_SECRET: thisismyauthsecretdontcopy
 volumes:
   mongodb_data:

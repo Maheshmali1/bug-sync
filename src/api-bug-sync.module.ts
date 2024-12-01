@@ -1,10 +1,11 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserController } from './controllers/user.controller';
-import { UserService } from './services';
-import { User, userSchema } from './entities';
+import { AuthService, UserService } from './services';
+import { BlackListToken, blackListTokenSchema, User, userSchema } from './entities';
 import { RouteLoggerMiddleware } from './middlewares';
+import { AuthController, UserController } from './controllers';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -16,10 +17,22 @@ import { RouteLoggerMiddleware } from './middlewares';
       }),
       inject: [ConfigService]
     }),
-    MongooseModule.forFeature([{ name: User.name, schema: userSchema }]),
+    MongooseModule.forFeature(
+      [{ name: User.name, schema: userSchema },
+      { name: BlackListToken.name, schema: blackListTokenSchema }
+      ]
+    ),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get('AUTH_SECRET'),
+        signOptions: { expiresIn: '15m' },
+      }),
+      inject: [ConfigService]
+    })
   ],
-  controllers: [UserController],
-  providers: [UserService],
+  controllers: [UserController,AuthController],
+  providers: [UserService,AuthService],
 })
   export class BugSyncModule {
   configure(consumer: MiddlewareConsumer): void{

@@ -50,4 +50,14 @@ export class UserService {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
   }
+
+  async getUserByEmail(email: string) : Promise<userDocument> {
+    const user = await this._userModel.findOne({email, is_delete: false});
+
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
+    return user;
+  }
 }

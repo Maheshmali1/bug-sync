@@ -27,8 +27,12 @@ export class  UserController {
       Logger.log(`Successfully fetched all users`);
       return new UserListResponseDTO(result as unknown as UserResponseDTO[]);
     } catch (err) {
-      Logger.error(`
-      Error while fetching users`, err);
+      Logger.error(`Error while fetching users`, err);
+
+      if(err instanceof HttpException) {
+        throw err;
+      }
+
       throw new HttpException('Error while fetching users', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
@@ -41,9 +45,12 @@ export class  UserController {
 
       Logger.log(`Successfully fetched user by id`, {id});
       return new UserResponseDTO(result as unknown as UserResponseDTO);
-    } catch (err) {
-      Logger.error(`
-      Error while fetching user by id`, err);
+    } catch (err){
+      Logger.error(`Error while fetching user by id`, err);
+
+      if(err instanceof HttpException) {
+        throw err;
+      }
       throw new HttpException('Error while fetching user by id', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
@@ -58,8 +65,11 @@ export class  UserController {
        Logger.log(`Successfully created user`, {id: result._id});
        return new UserResponseDTO(result as unknown as UserResponseDTO);
     } catch (err) {
-      Logger.error(`
-      Error while creating user`,err);
+      Logger.error(`Error while creating user`,err);
+
+      if(err instanceof HttpException) {
+        throw err;
+      }
       throw new HttpException("Error while creating user", HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
@@ -73,8 +83,11 @@ export class  UserController {
        Logger.log(`Successfully updated user by id`, {id});
        return new UserResponseDTO(result as unknown as UserResponseDTO);
     } catch (err) {
-      Logger.error(`
-      Error while updating user by id`, err);
+      Logger.error(`Error while updating user by id`, err);
+
+      if(err instanceof HttpException) {
+        throw err;
+      }
       throw new HttpException("Error while updating user by id", HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
@@ -86,8 +99,11 @@ export class  UserController {
        await  this._userService.deleteUserById(id);
        Logger.log(`Successfully deleted user by id`, {id});
     } catch (err) {
-      Logger.error(`
-      Error while deleting user by id`, err);
+      Logger.error(`Error while deleting user by id`, err);
+
+      if(err instanceof HttpException) {
+        throw err;
+      }
       throw new HttpException("Error while deleting user by id", HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
